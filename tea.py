@@ -1,10 +1,11 @@
 import asyncio
-import asyncpg
+import sqlite3
+import aiosqlite
 import aiohttp
 import random
 import time
 import logging
-import os
+import os  # ← ДОБАВЬ ЭТУ СТРОКУ
 from aiogram import Bot, Dispatcher, types, F
 from aiogram.filters import Command
 from aiogram.types import (
@@ -16,14 +17,18 @@ from aiogram.client.default import DefaultBotProperties
 
 # Настройка логирования
 logging.basicConfig(
-    format='%(asime)s - %(name)s - %(levelname)s - %(message)s',
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
     level=logging.INFO
 )
 logger = logging.getLogger(__name__)
 
-# Берем токен из переменных окружения (безопасно!)
-BOT_TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN")
-DATABASE_URL = os.environ.get("DATABASE_URL")
+# ЗАМЕНИ ЭТУ СТРОКУ:
+# BOT_TOKEN = "8209183337:AAGD35wDxLjo-hHRBDDHMea-BmvjXazNpvk"
+# НА ЭТУ:
+BOT_TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN", "8209183337:AAGD35wDxLjo-hHRBDDHMea-BmvjXazNpvk")
+
+# ВСЁ ОСТАЛЬНОЕ - КАК В ТВОЕМ ИСХОДНОМ КОДЕ (НИЧЕГО НЕ МЕНЯЙ!)
+# ... весь остальной код отсюда и до конца файла оставляем как есть
 
 if not BOT_TOKEN:
     raise ValueError("Нет TELEGRAM_BOT_TOKEN в переменных окружения!")
